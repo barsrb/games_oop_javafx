@@ -15,7 +15,7 @@ public class BishopTest {
 
         BishopBlack bishopBlack = new BishopBlack(src);
         Cell[] way = bishopBlack.way(src, dst);
-        Cell[] expected = new Cell[] {Cell.B2, Cell.C3, Cell.D4, Cell.E5, Cell.F6};
+        Cell[] expected = new Cell[] {Cell.C3, Cell.D4, Cell.E5, Cell.F6};
         assertThat(way, is(expected));
     }
 
@@ -26,7 +26,7 @@ public class BishopTest {
 
         BishopBlack bishopBlack = new BishopBlack(src);
         Cell[] way = bishopBlack.way(src, dst);
-        Cell[] expected = new Cell[] {Cell.A8, Cell.B7, Cell.C6, Cell.D5, Cell.E4};
+        Cell[] expected = new Cell[] {Cell.B7, Cell.C6, Cell.D5, Cell.E4};
         assertThat(way, is(expected));
     }
 
@@ -37,7 +37,7 @@ public class BishopTest {
 
         BishopBlack bishopBlack = new BishopBlack(src);
         Cell[] way = bishopBlack.way(src, dst);
-        Cell[] expected = new Cell[] {Cell.E3, Cell.D4, Cell.C5};
+        Cell[] expected = new Cell[] {Cell.D4, Cell.C5};
         assertThat(way, is(expected));
     }
 
@@ -48,7 +48,7 @@ public class BishopTest {
 
         BishopBlack bishopBlack = new BishopBlack(src);
         Cell[] way = bishopBlack.way(src, dst);
-        Cell[] expected = new Cell[] {Cell.B8, Cell.C7};
+        Cell[] expected = new Cell[] {Cell.C7};
         assertThat(way, is(expected));
     }
 
