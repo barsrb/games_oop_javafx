@@ -25,7 +25,17 @@ public class Logic {
         boolean rst = false;
         int index = this.findBy(source);
         if (index != -1) {
-            Cell[] steps = this.figures[index].way(source, dest);
+            Cell[] steps;
+            try {
+                steps = this.figures[index].way(source, dest);
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            for (int step = 1; step < steps.length; step++){
+                if (findBy(steps[step])!=-1) return false;
+            }
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
