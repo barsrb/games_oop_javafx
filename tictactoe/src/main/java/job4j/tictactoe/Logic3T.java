@@ -24,37 +24,28 @@ public class Logic3T {
         return result;
     }
 
+    private boolean isWin(Predicate<Figure3T> markBy) {
+        return this.fillBy(markBy, 0, 0, 1, 0) ||
+                this.fillBy(markBy, 0, 1, 1, 0) ||
+                this.fillBy(markBy, 0, 2, 1, 0) ||
+                this.fillBy(markBy, 0, 0, 0, 1) ||
+                this.fillBy(markBy, 1, 0, 0, 1) ||
+                this.fillBy(markBy, 2, 0, 0, 1) ||
+                this.fillBy(markBy, 0,0, 1, 1) ||
+                this.fillBy(markBy, this.table.length - 1 , 0, -1, 1);
+    }
+
     public boolean isWinnerX() {
-        return this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 0, 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 0, 2, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkX, 1, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkX, 2, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkX, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkX, this.table.length - 1 , 0, -1, 1);
+        return isWin(Figure3T::hasMarkX);
     }
 
     public boolean isWinnerO() {
-        return this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 0, 1, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 0, 2, 1, 0) ||
-                this.fillBy(Figure3T::hasMarkO, 0, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkO, 1, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkO, 2, 0, 0, 1) ||
-                this.fillBy(Figure3T::hasMarkO, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkO, this.table.length - 1 , 0, -1, 1);
-
+        return isWin(Figure3T::hasMarkO);
     }
 
     public boolean hasGap() {
-        long cellsCount = Arrays.stream(table)
+        return Arrays.stream(table)
                 .flatMap(Arrays::stream)
-                .count();
-        long markedCellCount =  Arrays.stream(table)
-                .flatMap(Arrays::stream)
-                .filter(figure3T -> figure3T.hasMarkX() || figure3T.hasMarkO())
-                .count();
-                return  cellsCount > markedCellCount;
+                .anyMatch(figure3T -> !figure3T.hasMarkX() && !figure3T.hasMarkO());
     }
 }
